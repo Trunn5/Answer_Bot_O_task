@@ -1,15 +1,17 @@
 import asyncio
 
-from loader import dp, bot
-from set_commands_to_menu import set_commands_to_menu
+from loader import bot
+from bot.utils.set_commands_to_menu import set_commands_to_menu
 
 from handlers import *
 
 
-async def on_startup(bot):
+async def main():
+    print("Запуск бота")
     await set_commands_to_menu(bot)
+    await dp.start_polling(bot)
 
 
 if __name__ == '__main__':
-    asyncio.run( dp.start_polling(bot, on_startup=on_startup(bot)) )
+    asyncio.run(main())
 

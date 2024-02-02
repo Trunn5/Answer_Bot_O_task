@@ -1,2 +1,2 @@
-import admin_keyboards
-import menu_keyboards
+from .admin_keyboards import update_data_keyboard
+from .choose_parameter_keyboard import parameter_keyboard
