@@ -8,3 +8,4 @@ load_dotenv(dotenv_path=dotenv_path)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 SHEET_ID = os.getenv("SHEET_ID")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
