@@ -2,6 +2,7 @@ from aiogram import types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
+import config
 import google_sheets.sheets
 from bot import keyboards, loader
 from bot.loader import dp
@@ -10,8 +11,8 @@ from bot.loader import dp
 @dp.message(Command('admin'))
 async def admin(m: types.Message, state: FSMContext):
     await state.clear()
-    await m.answer("""Привет, Админ👋
-Вот ссылка на таблицу {link}""", reply_markup=keyboards.update_data_keyboard)
+    await m.answer(f"""Привет, Админ👋
+Вот ссылка на таблицу https://docs.google.com/spreadsheets/d/{config.SHEET_ID}""", reply_markup=keyboards.update_data_keyboard)
 
 
 @dp.callback_query(F.data == "update_data")
