@@ -1,12 +1,14 @@
 import asyncio
 
-from loader import bot
+from bot.loader import bot
 from bot.utils.set_commands_to_menu import set_commands_to_menu
 
-from handlers import *
+from bot.handlers import *
+from google_sheets import sheets
 
 
 async def main():
+
     print("Запуск бота")
     await set_commands_to_menu(bot)
     await dp.start_polling(bot)

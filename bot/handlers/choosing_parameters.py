@@ -33,6 +33,7 @@ async def choosing_parameters(q: types.CallbackQuery, state: FSMContext):
     # Заканчиваем опрос если опросили всё до промта, начинаем диалог
     if stage == len(sheet_data[0]) - 2:
         prompt = get_next_parameters(data)[0]
+        await q.message.delete()
         await ai_message(q.message, state, prompt=prompt)
         return
 
