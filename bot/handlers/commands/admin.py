@@ -21,6 +21,7 @@ async def update_data(q: types.CallbackQuery):
     Данные для формировании меню тянуться из гугл таблицы
     """
     await q.answer("Начинается обновление данных")
+    await q.bot.send_chat_action(q.message.chat.id, "TYPING")
     # Обновление sheet_data в loader
     loader.change_sheet_data(await google_sheets.sheets.get_data())
 

@@ -8,18 +8,26 @@ import config
 client = OpenAI(api_key=config.OPENAI_API_KEY)
 
 
-async def get_message(messages: list):
+async def get_message(messages: list) -> str:
     """
     Выполняет запрос к chatGPT
+    Raises:
+        Переполнение токенов
     :param messages: история сообщений + текущий prompt
     :return: Строка с ответом
     """
     loop = asyncio.get_event_loop()
-    partial_api_request = partial(client.chat.completions.create, model="gpt-3.5-turbo", messages=messages)
-    res = await loop.run_in_executor(
-        None,
-        lambda: partial_api_request()
-    )
+    while True:
+        try:
+            partial_api_request = partial(client.chat.completions.create, model="gpt-3.5-turbo", messages=messages)
+            res = await loop.run_in_executor(
+                None,
+                lambda: partial_api_request()
+            )
+            break
+        except:
+            messages.pop(1)
+
     return res.choices[0].message.content
 
 
