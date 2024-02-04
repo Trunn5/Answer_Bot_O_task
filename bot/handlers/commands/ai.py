@@ -8,6 +8,7 @@ from bot.states import Ai
 
 @dp.message(Command('ai'))
 async def ai_message(m: types.Message, state: FSMContext, prompt: str = ""):
+    await m.delete()
     await state.update_data({'ai_history': [{'role': 'system', 'content': prompt}]})
     await state.set_state(Ai.ai)
     await m.answer("""Напишите сообщение ⬇️""")
