@@ -1,4 +1,5 @@
 import asyncio
+from functools import partial
 
 from openai import OpenAI
 
@@ -7,22 +8,19 @@ import config
 client = OpenAI(api_key=config.OPENAI_API_KEY)
 
 
-def api_request(messages: list):
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=messages
-    )
-    return completion.choices[0].message
-
-
 async def get_message(messages: list):
-   loop = asyncio.get_event_loop()
-   res = loop.run_in_executor(
-       None,
-       api_request,
-       messages
-   )
-   return res
+    """
+    Выполняет запрос к chatGPT
+    :param messages: история сообщений + текущий prompt
+    :return: Строка с ответом
+    """
+    loop = asyncio.get_event_loop()
+    partial_api_request = partial(client.chat.completions.create, model="gpt-3.5-turbo", messages=messages)
+    res = await loop.run_in_executor(
+        None,
+        lambda: partial_api_request()
+    )
+    return res.choices[0].message.content
 
 
 async def main():

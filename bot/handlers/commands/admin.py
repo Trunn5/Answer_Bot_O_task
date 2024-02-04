@@ -24,6 +24,4 @@ async def update_data(q: types.CallbackQuery):
     # Обновление sheet_data в loader
     loader.change_sheet_data(await google_sheets.sheets.get_data())
 
-    print(loader.sheet_data)
-
     await q.message.edit_text("✅ Операция прошла успешно")

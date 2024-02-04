@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 
@@ -26,8 +24,6 @@ async def ai(m: types.Message, state: FSMContext):
     # Добавляем ответ в историю
     history.append({"role": "assistant", "content": answer})
     await state.update_data({'ai_history': history})
-
-    pprint(history)
 
     await m.answer(answer, parse_mode=None)
 
