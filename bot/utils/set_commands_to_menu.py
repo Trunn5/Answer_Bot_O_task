@@ -10,7 +10,6 @@ async def set_commands_to_menu(bot: Bot) -> None:
     :return: None
     """
     await bot(SetMyCommands(commands=[
-        BotCommand(command='change', description='Изменить параметры'),
-        BotCommand(command='menu', description='Главное меню'),
-        BotCommand(command='ai', description='Свободное общение'),
+        BotCommand(command='menu', description='⬇️Главное меню'),
+        BotCommand(command='ai', description='🔥Свободное общение'),
     ]))
