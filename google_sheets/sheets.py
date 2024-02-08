@@ -60,6 +60,11 @@ async def get_data():
     except:
         ...
 
+    for i, row in enumerate(data):
+        for j, cell in enumerate(row):
+            if cell == '':
+                data[i][j] = "Пропустить"
+
     return data
 
 
