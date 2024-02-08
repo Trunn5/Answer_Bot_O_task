@@ -9,7 +9,5 @@ def get_next_parameters(current: list[str] = None) -> list[str]:
     """
     if not current: current = []
     l = len(current)
-
     res = {x[l] for x in get_sheet_data()[1:] if current == x[:l]}
-
     return list(res)

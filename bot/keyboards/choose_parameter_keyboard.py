@@ -13,6 +13,11 @@ def parameter_keyboard(current: list[str]) -> InlineKeyboardMarkup:
 
     next_parameters = get_next_parameters(current)
 
+    # Пропустить в самый низ
+    if "Пропустить" in next_parameters:
+        next_parameters.remove("Пропустить")
+        next_parameters.append("Пропустить")
+
     keyboard = InlineKeyboardBuilder()
 
     # callback: question_{id параметра}_{номер по списку}
